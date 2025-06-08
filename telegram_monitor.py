@@ -35,7 +35,17 @@ async def main():
             sequence.pop(0)
 
         # Check for 9 consecutive SIGNAL → WIN pairs
-        if sequence == ["call", "win"] * 9:
+        if sequence == [
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win",
+            "call", "win"
+        ]:
             print("🔥 Detected 9 consecutive SIGNAL → WIN pairs. Sending webhook...")
             try:
                 requests.post(webhook_url, json={"message": "9 consecutive trading wins detected on M1!"})
