@@ -14,7 +14,7 @@ client = TelegramClient(StringSession(string_session), api_id, api_hash)
 sequence = []
 
 async def main():
-    print("📡 Listening for messages on M5...")
+    print("📡 Listening for messages on M1...")
 
     @client.on(events.NewMessage(chats=channel_username))
     async def handler(event):
@@ -30,15 +30,15 @@ async def main():
             sequence.append("call")
             print("📈 Detected: SIGNAL CALL")
 
-        # Keep only the last 4 messages
-        if len(sequence) > 4:
+        # Keep only the last 18 messages
+        if len(sequence) > 18:
             sequence.pop(0)
 
-        # Check for 2 consecutive SIGNAL → WIN pairs
-        if sequence == ["call", "win", "call", "win"]:
-            print("🔥 Detected 2 consecutive SIGNAL → WIN pairs. Sending webhook...")
+        # Check for 9 consecutive SIGNAL → WIN pairs
+        if sequence == ["call", "win"] * 9:
+            print("🔥 Detected 9 consecutive SIGNAL → WIN pairs. Sending webhook...")
             try:
-                requests.post(webhook_url, json={"message": "2 consecutive trading wins detected on M5!"})
+                requests.post(webhook_url, json={"message": "9 consecutive trading wins detected on M1!"})
                 print("✅ Webhook sent.")
             except Exception as e:
                 print("❌ Webhook failed:", str(e))
